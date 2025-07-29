@@ -10,3 +10,5 @@
 - Nativewind 설치 명령어 02 : `npx expo install --dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11`
 - npx expo customize 명령어를 통한 `babel.config.js`, `metro.config.js` 파일 생성
 - Lucide React Native 설치 명령어 : `npm install lucide-react-native`
+- 웹 브라우저에서 프로젝트 실행을 위한 명령어 : `npx expo install react-native-web react-dom`
+
