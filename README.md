@@ -1,50 +1,12 @@
-# Welcome to your Expo app 👋
+## 1. 프로젝트 생성
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+- 프로젝트 생성 명령어 : `npx create-expo-app@latest`
+- 프로젝트 구조 초기화 명령어 : `npm run reset-project`
 
-## Get started
+## 2. 프로젝트 환경설정
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Expo 라우터 설치 명령어 : `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar`
+- Nativewind 설치 명령어 01 : `npx expo install nativewind react-native-reanimated@~3.17.4 react-native-safe-area-context@5.4.0`
+- Nativewind 설치 명령어 02 : `npx expo install --dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11`
+- npx expo customize 명령어를 통한 `babel.config.js`, `metro.config.js` 파일 생성
+- Lucide React Native 설치 명령어 : `npm install lucide-react-native`
