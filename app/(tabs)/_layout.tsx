@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Search, User, UtensilsCrossed } from "lucide-react-native";
+import { MapPin, User, UtensilsCrossed } from "lucide-react-native";
 
 export default function TabsLayout() {
     return (
@@ -17,7 +17,7 @@ export default function TabsLayout() {
             }}
         >
             <Tabs.Screen name="index" options={{ title: "홈", headerShown: false, tabBarIcon: () => <UtensilsCrossed size={20} /> }} />
-            <Tabs.Screen name="search" options={{ title: "검색", headerShown: false, tabBarIcon: () => <Search size={20} /> }} />
+            <Tabs.Screen name="search" options={{ title: "지도", headerShown: false, tabBarIcon: () => <MapPin size={20} /> }} />
             <Tabs.Screen name="profile" options={{ title: "프로필", headerShown: false, tabBarIcon: () => <User size={20} /> }} />
         </Tabs>
     );
