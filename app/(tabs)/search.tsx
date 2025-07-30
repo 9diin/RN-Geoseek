@@ -1,5 +1,7 @@
+import { BlogCard } from "@/src/components";
+import { useNaverBlog } from "@/src/hooks";
 import { ChevronRight, Search } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Linking, Pressable, Text, TextInput, View } from "react-native";
 import { WebView } from "react-native-webview";
 
@@ -33,7 +35,12 @@ const HTML = `
 `;
 
 export default function SearchScreen() {
-    const [keyword, setKeyword] = useState<string>("");
+    const [keyword, setKeyword] = useState<string>("서울특별시청");
+    const { blogs, loading, fetchData } = useNaverBlog();
+
+    useEffect(() => {
+        fetchData(keyword);
+    }, []);
 
     return (
         <View className="flex-col w-full h-full p-4 gap-4">
@@ -80,6 +87,9 @@ export default function SearchScreen() {
             </View>
             <View className="h-px bg-neutral-200" />
             <WebView source={{ html: HTML, baseUrl: "http://localhost:8081" }} originWhitelist={["*"]} javaScriptEnabled domStorageEnabled />
+            <View className="w-full flex-row">
+                <BlogCard />
+            </View>
         </View>
     );
 }
