@@ -2,10 +2,10 @@ import { InfoCard } from "@/src/components";
 import { useNaverSearch } from "@/src/hooks";
 import { Search } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Pressable, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
-    const [keyword, setKeyword] = useState("강남");
+    const [keyword, setKeyword] = useState("");
     const { data, loading, fetchData } = useNaverSearch();
 
     useEffect(() => {
@@ -23,7 +23,15 @@ export default function HomeScreen() {
                     <Text>검색</Text>
                 </Pressable>
             </View>
-            <FlatList data={data} renderItem={({ item }) => <InfoCard props={item}></InfoCard>} ItemSeparatorComponent={() => <View style={{ height: 14 }} />} />
+            {loading ? (
+                <ActivityIndicator size="large" color="#4B5563" />
+            ) : data === undefined ? (
+                <View className="w-full h-full items-center justify-center">
+                    <Text className="text-neutral-400">조회 가능한 데이터가 없습니다.</Text>
+                </View>
+            ) : (
+                <FlatList data={data} renderItem={({ item }) => <InfoCard props={item}></InfoCard>} ItemSeparatorComponent={() => <View style={{ height: 14 }} />} />
+            )}
         </View>
     );
 }

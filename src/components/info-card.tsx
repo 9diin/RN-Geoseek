@@ -32,22 +32,22 @@ export function InfoCard({ props }: Props) {
                 </Pressable>
             </View>
             <View className="h-px bg-neutral-200 my-1" />
-            <View className="gap-2">
+            <View className="w-full gap-2">
                 <Text className="text-xl font-semibold">{props.title.replace(/<[^>]+>/g, "")}</Text>
-                <View className="gap-1">
-                    <View className="flex-row items-center gap-1">
+                <View className="w-full gap-1">
+                    <View className="w-full flex-row items-center gap-1">
                         <View className="w-fit h-fit bg-neutral-50 border border-neutral-100 px-2 py-1 rounded-md">
                             <Text className="text-xs text-neutral-500">지번</Text>
                         </View>
-                        <Text className="text-sm text-neutral-500">{props.address}</Text>
+                        <Text className="flex-1 text-sm text-neutral-500 line-clamp-1">{props.address ? props.address : "등록된 지번이 없습니다."}</Text>
                     </View>
-                    <View className="flex-row items-center gap-1">
+                    <View className="w-full flex-row items-center gap-1">
                         <View className="w-fit h-fit bg-neutral-50 border border-neutral-100 px-2 py-1 rounded-md">
                             <Text className="text-xs text-neutral-500">도로명</Text>
                         </View>
-                        <Text className="text-sm text-neutral-500">{props.roadAddress}</Text>
+                        <Text className="flex-1 text-sm text-neutral-500 line-clamp-1">{props.roadAddress ? props.roadAddress : "등록된 도로명이 없습니다."}</Text>
                     </View>
-                    <View className="flex-row items-center gap-1">
+                    <View className="w-full flex-row items-center gap-1">
                         <View className="w-fit h-fit bg-neutral-50 border border-neutral-100 px-2 py-1 rounded-md">
                             <Text className="text-xs text-neutral-500">전화번호</Text>
                         </View>

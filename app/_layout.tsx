@@ -1,6 +1,6 @@
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Slot } from "expo-router";
-import { SafeAreaView } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView } from "react-native";
 import "./global.css";
 
 const appTheme = {
@@ -15,9 +15,11 @@ const appTheme = {
 export default function RootLayout() {
     return (
         <ThemeProvider value={appTheme}>
-            <SafeAreaView className="w-full h-full">
-                <Slot />
-            </SafeAreaView>
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+                <SafeAreaView className="w-full h-full">
+                    <Slot />
+                </SafeAreaView>
+            </KeyboardAvoidingView>
         </ThemeProvider>
     );
 }

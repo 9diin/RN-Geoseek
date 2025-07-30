@@ -13,6 +13,7 @@ export default function TabsLayout() {
                 tabBarLabelStyle: {
                     marginTop: 2,
                 },
+                tabBarHideOnKeyboard: true,
             }}
         >
             <Tabs.Screen name="index" options={{ title: "홈", headerShown: false, tabBarIcon: () => <UtensilsCrossed size={20} /> }} />
