@@ -1,12 +1,11 @@
-import { MessagesSquare } from "lucide-react-native";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export function BlogCard() {
     return (
         <View className="p-4 bg-white rounded-lg border border-neutral-200">
             <View className="gap-2">
                 <View className="w-full flex-row gap-2">
-                    <MessagesSquare size={24} color={"#a3a3a3"} />
+                    <Image source={require("../assets/blog-logo.png")} className="w-6 h-6 mt-[2px]" />
                     <Text className="text-lg font-semibold line-clamp-1">서울 나들이 서울 특별시청, 덕수궁-돈덕전</Text>
                 </View>
                 <Text className="text-neutral-500 line-clamp-4">
