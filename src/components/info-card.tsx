@@ -21,8 +21,8 @@ export function InfoCard({ props }: Props) {
     const setMapy = useAxisStore((state) => state.setMapy);
 
     const handleCardPress = () => {
-        setMapx(props.mapx);
-        setMapy(props.mapy);
+        setMapx((parseFloat(props.mapx) / 1e7).toFixed(4)); // 소수점 3자리
+        setMapy((parseFloat(props.mapy) / 1e7).toFixed(4)); // 소수점 2자리
 
         router.push("/search");
     };
