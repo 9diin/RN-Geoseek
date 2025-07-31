@@ -17,7 +17,6 @@ export function useNaverBlog() {
                 },
             });
             const data = await response.json();
-            console.log(data.items);
 
             if (data) setBlogs(data.items);
         } catch (error) {

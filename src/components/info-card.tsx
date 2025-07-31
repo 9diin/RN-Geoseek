@@ -1,5 +1,7 @@
+import { router } from "expo-router";
 import { ChevronRight } from "lucide-react-native";
 import { FlatList, Linking, Pressable, Text, View } from "react-native";
+import { useAxisStore } from "../stores";
 
 interface Props {
     props: {
@@ -9,12 +11,24 @@ interface Props {
         roadAddress: string;
         telephone: string;
         link: string;
+        mapx: string;
+        mapy: string;
     };
 }
 
 export function InfoCard({ props }: Props) {
+    const setMapx = useAxisStore((state) => state.setMapx);
+    const setMapy = useAxisStore((state) => state.setMapy);
+
+    const handleCardPress = () => {
+        setMapx(props.mapx);
+        setMapy(props.mapy);
+
+        router.push("/search");
+    };
+
     return (
-        <View className="w-full p-4 gap-2 border border-neutral-200 rounded-lg shadow-xs bg-white">
+        <Pressable className="w-full p-4 gap-2 border border-neutral-200 rounded-lg shadow-xs bg-white" onPress={handleCardPress}>
             <View className="flex-row items-center">
                 <FlatList
                     data={props.category.split(">")}
@@ -55,6 +69,6 @@ export function InfoCard({ props }: Props) {
                     </View>
                 </View>
             </View>
-        </View>
+        </Pressable>
     );
 }

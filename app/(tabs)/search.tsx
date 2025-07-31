@@ -1,49 +1,53 @@
 import { BlogCard } from "@/src/components";
 import { useNaverBlog } from "@/src/hooks";
+import { useAxisStore, useKeywordStore } from "@/src/stores";
 import { ChevronRight, Search } from "lucide-react-native";
-import { useEffect, useState } from "react";
-import { Linking, Pressable, Text, TextInput, View } from "react-native";
+import { useEffect } from "react";
+import { FlatList, Linking, Pressable, Text, TextInput, View } from "react-native";
 import { WebView } from "react-native-webview";
 
-const HTML = `
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-            <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=9ab8xv0kjx"></script>
-        </head>
-        <body>
-            <div id="map" style="width:100%;height:320px;"></div>
-
-            <script>
-                let mapOptions = {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 16
-                };
-                let map = new naver.maps.Map('map', mapOptions);
-                // window.ReactNativeWebView.postMessage();
-
-                let marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(37.3595704, 127.105399), // 마커 위치
-                    map: map, // 표시할 지도 객체
-                });
-            </script>
-        </body>
-    </html>
-`;
-
 export default function SearchScreen() {
-    const [keyword, setKeyword] = useState<string>("서울특별시청");
+    const mapx = useAxisStore((state) => state.mapx);
+    const mapy = useAxisStore((state) => state.mapy);
+
+    const keyword = useKeywordStore((state) => state.keyword);
+    const setKeyword = useKeywordStore((state) => state.setKeyword);
+
     const { blogs, loading, fetchData } = useNaverBlog();
 
     useEffect(() => {
         fetchData(keyword);
     }, []);
 
+    const HTML = `
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+                <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=9ab8xv0kjx"></script>
+            </head>
+            <body>
+                <div id="map" style="width:100%;height:320px;"></div>
+                <script>
+                    const mapOptions = {
+                        center: new naver.maps.LatLng(${mapy || 37.5665}, ${mapx || 126.978}),
+                        zoom: 16
+                    };
+                    const map = new naver.maps.Map('map', mapOptions);
+
+                    const marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(${mapy || 37.5665}, ${mapx || 126.978}),
+                        map: map
+                    });
+                </script>
+            </body>
+        </html>
+    `;
+
     return (
-        <View className="flex-col w-full h-full p-4 gap-4">
+        <View className="flex-col w-full p-4 gap-4">
             <View className="flex-row items-center gap-2 bg-white">
                 <View className="flex-1 flex-row items-center gap-2 px-2 py-[10px] rounded-lg shadow-xs border border-neutral-200">
                     <Search size={20} color={"#d4d4d4"} />
@@ -53,6 +57,7 @@ export default function SearchScreen() {
                     <Text>검색</Text>
                 </Pressable>
             </View>
+
             <View className="w-full bg-white p-4 rounded-lg border border-neutral-200">
                 <View className="w-full gap-2">
                     <View className="w-full flex-row items-center justify-between">
@@ -87,9 +92,13 @@ export default function SearchScreen() {
             </View>
             <View className="h-px bg-neutral-200" />
             <WebView source={{ html: HTML, baseUrl: "http://localhost:8081" }} originWhitelist={["*"]} javaScriptEnabled domStorageEnabled />
-            <View className="w-full flex-row">
-                <BlogCard />
-            </View>
+            {blogs === undefined ? (
+                <View className="w-full h-full items-center justify-center">
+                    <Text className="text-neutral-400">조회 가능한 데이터가 없습니다.</Text>
+                </View>
+            ) : (
+                <FlatList data={blogs} renderItem={({ item }) => <BlogCard props={item}></BlogCard>} ItemSeparatorComponent={() => <View style={{ height: 14 }} />} />
+            )}
         </View>
     );
 }
